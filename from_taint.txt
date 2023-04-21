@@ -1,0 +1,23 @@
+taint
+3d64
+
+app.objdump.disasm
+
+app.inst.objdump.disasm
+bb_3d60
+341f0
+341f7
+
+--> match and find the same BB --> inst_BB_name
+
+ciphertrace.out
+1f0]
+nextline PC
+1f7]
+
+
+====
+3d74
+0x5612a008f460
+0x5612e008e460
+

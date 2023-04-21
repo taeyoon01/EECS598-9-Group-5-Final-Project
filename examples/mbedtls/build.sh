@@ -1,8 +1,11 @@
 #!/bin/bash
 
 CC="${CC:-gcc}"
-INSTALL_DIR="${CF_MBEDTLS_DIR:-$INSTALL_DIR}"
+#INSTALL_DIR="${CF_MBEDTLS_DIR:-$INSTALL_DIR}"
+#INSTALL_DIR = "/home/taeyoonk/cipherfix/mbedtls"
+export INSTALL_DIR=/home/taeyoonk/cipherfix/mbedtls
 
+echo $INSTALL_DIR
 mkdir -p rsa aes aes-multiround chacha20 chacha20-multiround ecdh base64 ecdsa
 ${CC} rsa.c -O2 -fstack-reuse=none -fno-optimize-sibling-calls -mno-push-args -fPIE -pie -I$INSTALL_DIR/include -L$INSTALL_DIR/library $INSTALL_DIR/library/libmbedtls.a $INSTALL_DIR/library/libmbedx509.a $INSTALL_DIR/library/libmbedcrypto.a -o rsa/app
 ${CC} aes.c -O2 -fstack-reuse=none -fno-optimize-sibling-calls -mno-push-args -fPIE -pie -I$INSTALL_DIR/include -L$INSTALL_DIR/library $INSTALL_DIR/library/libmbedtls.a $INSTALL_DIR/library/libmbedx509.a $INSTALL_DIR/library/libmbedcrypto.a -o aes/app

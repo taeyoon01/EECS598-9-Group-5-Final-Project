@@ -1,0 +1,16 @@
+1.
+7fa7915e8270 33270
+7fa7915e8270 – 33270 = 7FA7915B5000
+
+2. ld-linux file
+7efcdcec0197 – 2197 = 7EFCDCEBE000
+
+7efcdcedd0b4 – 1f0b4 = 7EFCDCEBE000
+
+3. libc
+55a00e62c2ce 1f22ce
+55a00e62c2ce – 1f22ce = 55A00E43A000
+
+
+[7efcc95d7253] rep stosq qword ptr [rdi]
+don't see this anywhere

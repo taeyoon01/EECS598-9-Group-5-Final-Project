@@ -1,0 +1,110 @@
+How to instrument
+
+export PIN_ROOT=/home/taeyoonk/pin-3.26
+export TOOLS_ROOT=/home/taeyoonk/pin-3.26/source/tools
+export CONFIG_ROOT=/home/taeyoonk/pin-3.26/source/tools/Config
+
+
+
+1. run analysis.sh
+2. rerun analysis.sh with new id
+2. run instrument.sh
+4. objdump
+5. append
+6. rerun instrument.sh
+7. evaluate
+
+./analyze.sh /home/taeyoonk/cipherfix/examples/mbedtls/rsa /home/taeyoonk/cipherfix/mbedtls/library "1" app
+./analyze.sh /home/taeyoonk/cipherfix/examples/mbedtls/chacha20-multiround /home/taeyoonk/cipherfix/mbedtls/library "1;4" app 10
+./analyze.sh /home/taeyoonk/cipherfix/examples/mbedtls/rsa /home/taeyoonk/cipherfix/mbedtls/library "1;4" app
+./analyze.sh /home/taeyoonk/cipherfix/examples/wolfssl/aes /home/taeyoonk/wolfssl-5.6.0/lib "1" app
+./analyze.sh /home/taeyoonk/cipherfix/examples/wolfssl/aes-multiround /home/taeyoonk/wolfssl-5.6.0/lib "1" app
+./analyze.sh /home/taeyoonk/cipherfix/examples/wolfssl/chacha20-multiround /home/taeyoonk/wolfssl-5.6.0/lib "1;4;5;6;7" app 10
+./analyze.sh /home/taeyoonk/cipherfix/examples/wolfssl/chacha20-multiround /home/taeyoonk/wolfssl-5.6.0/lib "1" app 10
+
+
+
+./analyze.sh /home/taeyoonk/cipherfix/examples/wolfssl/aes /home/taeyoonk/wolfssl-5.6.0/lib "1;4;5;6;7;" app
+
+
+./instrument.sh /home/taeyoonk/cipherfix/examples/mbedtls/rsa fast aesrng
+./instrument.sh /home/taeyoonk/cipherfix/examples/mbedtls/aes fast aesrng
+./instrument.sh /home/taeyoonk/cipherfix/examples/wolfssl/aes base aesrng
+./instrument.sh /home/taeyoonk/cipherfix/examples/mbedtls/chacha20-multiround fast aesrng
+./instrument.sh /home/taeyoonk/cipherfix/examples/wolfssl/chacha20-multiround fast aesrng
+
+
+--evalmarker--
+./instrument.sh /home/taeyoonk/cipherfix/examples/mbedtls/rsa fast aesrng-evalmarker
+./instrument.sh /home/taeyoonk/cipherfix/examples/mbedtls/aes fast aesrng-evalmarker
+./instrument.sh /home/taeyoonk/cipherfix/examples/mbedtls/ecdsa base aesrng-evalmarker
+./instrument.sh /home/taeyoonk/cipherfix/examples/mbedtls/chacha20-multiround fast aesrng-evalmarker
+./instrument.sh /home/taeyoonk/cipherfix/examples/wolfssl/aes-multiround fast aesrng-evalmarker
+
+
+
+objdump -d examples/mbedtls/rsa/app > tmp.txt
+objdump -d examples/wolfssl/aes/instr-base-aesrng/ > examples/wolfssl/aes/instr-base-aesrng/.txt
+objdump -d examples/mbedtls/chacha20-multiround/app > examples/mbedtls/chacha20-multiround/app.objdump.disasm
+objdump -d examples/mbedtls/chacha20-multiround/app > examples/mbedtls/chacha20-multiround/app.objdump.disasm
+objdump -d /lib/x86_64-linux-gnu/libc.so.6 > examples/mbedtls/chacha20-multiround/libc.objdump.disasm
+
+
+objdump -d /lib/x86_64-linux-gnu/libc.so.6 > examples/wolfssl/aes/instr-base-aesrng/libc.objdump
+echo -e "Mm 0000555afb93b340\nMc 0000555afb93b2d0\nMm 00007f241640c310" >> cipherfix/examples/mbedtls/rsa/structure.out
+./instrument.sh /home/taeyoonk/cipherfix/examples/mbedtls/rsa fast aesrng
+
+
+
+
+--permisson to run---
+chmod +x app.instr
+
+
+objdump -d examples/mbedtls/rsa/instr-fast-aesrng-evalmarker/app.instr > tmp.txt
+objdump -d examples/mbedtls/aes/app > tmp_aes.txt
+objdump -d examples/mbedtls/aes/instr-fast-aesrng/app.instr > aes_instr.txt
+objdump -d examples/mbedtls/aes/instr-fast-aesrng/libc.so.6.instr > aes_instr.txt
+
+objdump -d examples/mbedtls/aes/instr-fast-aesrng-evalmarker/app.instr > aes_instr_evalmarker.txt
+
+
+----pin----
+~/pin-3.26/pin -t ~/pin-3.26/source/tools/ManualExamples/obj-intel64/ciphertrace.so -- ./app.instr
+
+0x7ff1ee3a4776 
+0x7ff1ee39b2d0
+
+---evaluate----
+
+./evaluate.sh <working directory> <instr directory> <interesting offsets> <main binary> [<application arguments>]
+./evaluate.sh /home/taeyoonk/cipherfix/examples/mbedtls/aes /home/taeyoonk/cipherfix/examples/mbedtls/aes/instr-fast-aesrng-evalmarker "1;" app
+./evaluate.sh /home/taeyoonk/cipherfix/examples/mbedtls/aes /home/taeyoonk/cipherfix/examples/mbedtls/aes/instr-fast-aesrng-evalmarker "1.afc3.afe4;" app
+./evaluate.sh /home/taeyoonk/cipherfix/examples/mbedtls/aes /home/taeyoonk/cipherfix/examples/mbedtls/aes/instr-fast-aesrng-evalmarker "1.0000.FFFF;4.0000.FFFF" app
+./evaluate.sh /home/taeyoonk/cipherfix/examples/mbedtls/ecdsa /home/taeyoonk/cipherfix/examples/mbedtls/ecdsa/instr-fast-aesrng-evalmarker "1.0000.ffff;4.0000.FFFF" app
+./evaluate.sh /home/taeyoonk/cipherfix/examples/mbedtls/ecdsa /home/taeyoonk/cipherfix/examples/mbedtls/ecdsa/instr-base-aesrng-evalmarker "1.0000.ffff;4.0000.FFFF" app
+
+
+from cipherfix/evaluation
+./run.sh /home/taeyoonk/cipherfix/examples/mbedtls/aes /home/taeyoonk/cipherfix/examples/mbedtls/aes/instr-fast-aesrng
+
+./run.sh /home/taeyoonk/cipherfix/examples/mbedtls/aes "1" app.instr 
+
+---collision detection---
+python3 ../../../disasmDiff.py ./app.diff.txt ./ciphertrace.out | tee cipherCollisions.out
+python3 ../../../collisionCatcher.py ./ciphertrace.out ./app.instr | tee cipherCollisions.out
+python3 ../../../collisionCatcher.py ./ciphertrace.out ./app.instr  ./libc.so.6.instr | tee cipherCollisions.out
+python3 ../../../collisionCatcher.py ./ciphertrace.out ./app.instr /lib64/ld-linux-x86-64.so.2 ./libc.so.6.instr >cipherCollisions.out
+python3 ../../../collisionCatcher.py ./ciphertrace.out ./app.instr /lib64/ld-linux-x86-64.so.2 ./libc.so.6.instr | tee cipherCollisions.out
+python3 ../../../collisionCatcher.py ./ciphertrace.out ./app.instr /lib64/ld-linux-x86-64.so.2 ./libc.so.6.instr | tee cipherCollisions.out
+---pintool----python3 ../../../collisionCatcher.py ./ciphertrace.out ./app.instr /lib64/ld-linux-x86-64.so.2 ./libc.so.6.instr ./libm.so.6.instr ./libthread.so.35.instr ./libwolfssl.so.35.instr | tee cipherCollisions.out
+under path_to_PIN/source/tools/ManualExamples
+$ make obj-intel64/ciphertrace.so
+
+under the directory where the tested app exist
+$ path_to_PIN/pin -t path_to_PIN/source/tools/obj-intel64/ciphertrace.so -- [app_name]
+/home/taeyoonk/pin-3.26/pin -t /home/taeyoonk/pin-3.26/source/tools/ManualExamples/obj-intel64/ciphertrace.so -- ./app.instr
+/home/taeyoonk/pin-3.26/pin -t /home/taeyoonk/pin-3.26/source/tools/ManualExamples/obj-intel64/ciphertrace_v1.so -- ./app.instr
+
+/home/taeyoonk/pin-3.26/pin -t /home/taeyoonk/pin-3.26/source/tools/ManualExamples/obj-intel64/ciphertrace_v1.so -- ./app
+

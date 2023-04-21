@@ -1,0 +1,554 @@
+Running structure analysis
+~/cipherfix/structure-analysis ~/cipherfix
+7f2229ba7f39: brk 0  ->  557a0b8be000
+7f2229ba9174: mmap 0 d23f 1 2 3 0  ->  7f2216035000
+7f2229ba9174: mmap 0 2000 3 22 ffffffff 0  ->  7f2215f35000
+7f2229ba9174: mmap 0 1f14d8 1 802 3 0  ->  7f2215cdf000
+7f2229ba9174: mmap 7f2215d04000 178000 5 812 3 25000  ->  7f2215d04000
+7f2229ba9174: mmap 7f2215e7c000 4a000 1 812 3 19d000  ->  7f2215e7c000
+7f2229ba9174: mmap 7f2215ec7000 6000 3 812 3 1e7000  ->  7f2215ec7000
+7f2229ba9174: mmap 7f2215ecd000 34d8 3 32 ffffffff 0  ->  7f2215ecd000
+7f2229ba91f9: munmap 7f2216035000 d23f  ->  0
+7f2215df63e9: brk 0  ->  557a0b8be000
+7f2215df63e9: brk 557a0b8df000  ->  557a0b8df000
+ciphertext  af 0a 4f d2 ee 95 fa 6d 46 db 22 27 b6 62 f1 d3 
+tag  fc 96 37 d3 ca b4 77 f9 b8 6e de 65 a4 06 69 85 
+
+Init time:    130756 us ->   130.756 ms
+Loop time:    285320 us ->   285.320 ms
+Analysis done, writing results
+~/cipherfix
+Running static variable detection
+~/cipherfix/static-variables ~/cipherfix
+==============================================================
+This application is instrumented by static variable detection
+See file /home/taeyoonk/cipherfix/examples/mbedtls/aes/static-vars.out for analysis results
+==============================================================
+ciphertext  af 0a 4f d2 ee 95 fa 6d 46 db 22 27 b6 62 f1 d3 
+tag  fc 96 37 d3 ca b4 77 f9 b8 6e de 65 a4 06 69 85 
+
+Init time:     20908 us ->    20.908 ms
+Loop time:     53680 us ->    53.680 ms
+~/cipherfix
+Running taint tracking
+~/cipherfix/taint-tracking ~/cipherfix
+[INFO] stackMin from /proc/self/maps: 7fff1b01f000
+[INFO] stackMax from /proc/self/maps: 7fff1b041000
+[INFO] stackMinBuffered: 7fff1a81f000
+[INFO] stackMaxBuffered: 7fff1b041000
+[INFO] Instrumenting image #1 /home/taeyoonk/cipherfix/examples/mbedtls/aes/app
+[INFO]    Address: 55ae0e7ca000 ... 55ae0e7fc5cf
+[INFO]    main function at 55ae0e7cd390 instrumented.
+[INFO]    classify() instrumented.
+[INFO]    declassify() instrumented.
+[INFO]    drop_taint() instrumented.
+[INFO] Instrumenting image #2 /lib64/ld-linux-x86-64.so.2
+[INFO]    => Dynamic linker
+[INFO]    Address: 7f00c9d6a000 ... 7f00c9d9918f
+[INFO] Instrumenting image #3 [vdso]
+[INFO]    Address: 7fff1b061000 ... 7fff1b0619ad
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 d26f (7f00c9d7726f)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 34e9 (7f00c9d6d4e9)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 10bc7 (7f00c9d7abc7)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 a096 (7f00c9d74096)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 a0e4 (7f00c9d740e4)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 a379 (7f00c9d74379)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 1f5ca (7f00c9d895ca)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 9cf5 (7f00c9d73cf5)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 9c8b (7f00c9d73c8b)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 f94e (7f00c9d7994e)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 1f5ca (7f00c9d895ca)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 8803 (7f00c9d72803)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 d26f (7f00c9d7726f)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 d5a3 (7f00c9d775a3)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 f94e (7f00c9d7994e)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 f71a (7f00c9d7971a)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 fc35 (7f00c9d79c35)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 13306 (7f00c9d7d306)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 13306 (7f00c9d7d306)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 13306 (7f00c9d7d306)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 13306 (7f00c9d7d306)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 1c1a (7f00c9d6bc1a)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 146bb (7f00c9d7e6bb)
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 2 1472f (7f00c9d7e72f)
+[INFO] Instrumenting image #4 /lib/x86_64-linux-gnu/libc.so.6
+[INFO]    => libc
+[INFO]    Dropping all instrumentation
+[INFO]    Address: 7f00b1cd0000 ... 7f00b1ec14d7
+[INFO]    malloc() instrumented.
+[INFO]    calloc() instrumented.
+[INFO]    realloc() instrumented.
+[INFO]    free() instrumented.
+[ERROR] [PLT] Call into .plt, but we are in state 1 at 4 122102 (7f00b1df2102)
+[WARN] Stack frame add at 0x7f00c98df190 35e9, but there is no stack frame
+[WARN] Stack frame sub at 1 35f1, but there is no stack frame
+[WARN] Stack frame sub at 1 35f2, but there is no stack frame
+[INFO] ######################## Leaving prefix ########################
+[INFO]    Cleared all global variables.
+[ERROR] [TAINT] Could not instrument unknown instruction 'rdtscp ' at 3 78d
+[ERROR] [TAINT] Could not instrument unknown instruction 'rdtscp ' at 3 78d
+[INFO] [TAINT] Classifying secret at 55ae0e7fa030, 0x10 bytes
+[INFO] [TAINT] Classifying secret at 55ae0e7fa010, 0x10 bytes
+[INFO] [TAINT] Declassifying secret at 55ae0f35c430, 0x4 bytes
+[INFO] [TAINT]   Marking memory block #20 as non-secret
+[INFO] [TAINT] Declassifying secret at 55ae0f35c410, 0x10 bytes
+[INFO] [TAINT]   Marking memory block #19 as non-secret
+ciphertext  af 0a 4f d2 ee 95 fa 6d 46 db 22 27 b6 62 f1 d3 
+[INFO] [TAINT] Declassifying secret at 55ae0f35c860, 0x4 bytes
+[INFO] [TAINT]   Marking memory block #23 as non-secret
+[INFO] [TAINT] Declassifying secret at 55ae0f35c410, 0x10 bytes
+[INFO] [TAINT]   Marking memory block #22 as non-secret
+tag  fc 96 37 d3 ca b4 77 f9 b8 6e de 65 a4 06 69 85 
+[INFO] [TAINT] Dropping all taint tags
+
+[ERROR] [TAINT] Could not instrument unknown instruction 'fld st, ptr [rdx]' at 4 5f1b5
+[ERROR] [TAINT] Could not instrument unknown instruction 'fucomi st, st(0)' at 4 5f1b7
+[ERROR] [TAINT] Could not instrument unknown instruction 'fld st, ptr [rip+0x16050b]' at 4 5f1bf
+[ERROR] [TAINT] Could not instrument unknown instruction 'fld st, st(1)' at 4 5f1c5
+[ERROR] [TAINT] Could not instrument unknown instruction 'fabs ' at 4 5f1c7
+[ERROR] [TAINT] Could not instrument unknown instruction 'fucomip st, st(1)' at 4 5f1c9
+[ERROR] [TAINT] Could not instrument unknown instruction 'fstp st(0), st' at 4 5f1cb
+[ERROR] [TAINT] Could not instrument unknown instruction 'andpd xmm1, xmmword ptr [rip+0x1604e6]' at 4 5f202
+[ERROR] [TAINT] Could not instrument unknown instruction 'movmskpd r13d, xmm0' at 4 5f218
+Init time:    136198 us ->   136.198 ms
+Loop time:    331129 us ->   331.129 ms
+[INFO] Printing image information.
+[INFO] Printing stack frame information.
+[INFO] Printing heap object and static variables information.
+[INFO] Printing callstack information.
+[WARN] Instruction with access type NONE: 4 9618d
+[WARN] Instruction with access type NONE: 4 95f67
+[WARN] Instruction with access type NONE: 4 16241e
+[WARN] Instruction with access type NONE: 4 e0220
+[WARN] Instruction with access type NONE: 4 9b605
+[WARN] Instruction with access type NONE: 4 960f6
+[WARN] Instruction with access type NONE: 4 18eb79
+[WARN] Instruction with access type NONE: 4 18eb8f
+[WARN] Instruction with access type NONE: 4 9573d
+[WARN] Instruction with access type NONE: 3 79e
+[WARN] Instruction with access type NONE: 4 93f4a
+[WARN] Instruction with access type NONE: 4 9aa00
+[WARN] Instruction with access type NONE: 4 9b3ce
+[WARN] Instruction with access type NONE: 4 89454
+[WARN] Instruction with access type NONE: 4 92777
+[WARN] Instruction with access type NONE: 4 99c97
+[WARN] Instruction with access type NONE: 4 95185
+[WARN] Instruction with access type NONE: 4 95d00
+[WARN] Instruction with access type NONE: 4 9c1ed
+[WARN] Instruction with access type NONE: 4 9d388
+[WARN] Instruction with access type NONE: 4 9d3d0
+[WARN] Instruction with access type NONE: 4 95f75
+[WARN] Instruction with access type NONE: 4 59728
+[WARN] Instruction with access type NONE: 4 79b40
+[WARN] Instruction with access type NONE: 4 9adf0
+[WARN] Instruction with access type NONE: 4 9ecf4
+[WARN] Instruction with access type NONE: 4 95f85
+[WARN] Instruction with access type NONE: 4 7a12e
+[WARN] Instruction with access type NONE: 4 9b021
+[WARN] Instruction with access type NONE: 4 93f86
+[WARN] Instruction with access type NONE: 4 95c38
+[WARN] Instruction with access type NONE: 4 93af3
+[WARN] Instruction with access type NONE: 4 86d84
+[WARN] Instruction with access type NONE: 4 79a34
+[WARN] Instruction with access type NONE: 4 9a71f
+[WARN] Instruction with access type NONE: 4 9cca8
+[WARN] Instruction with access type NONE: 4 499cd
+[WARN] Instruction with access type NONE: 4 95d93
+[WARN] Instruction with access type NONE: 4 9c3b2
+[WARN] Instruction with access type NONE: 4 18eb5e
+[WARN] Instruction with access type NONE: 3 7a6
+[WARN] Instruction with access type NONE: 4 5f779
+[WARN] Instruction with access type NONE: 4 951b0
+[WARN] Instruction with access type NONE: 4 5f8ba
+[WARN] Instruction with access type NONE: 4 9b8c0
+[WARN] Instruction with access type NONE: 4 95d14
+[WARN] Instruction with access type NONE: 4 9a90d
+[WARN] Instruction with access type NONE: 4 93a71
+[WARN] Instruction with access type NONE: 4 894cb
+[WARN] Instruction with access type NONE: 4 9d264
+[WARN] Instruction with access type NONE: 4 4a0c1
+[WARN] Instruction with access type NONE: 4 9d272
+[WARN] Instruction with access type NONE: 4 16246b
+[WARN] Instruction with access type NONE: 4 9d377
+[WARN] Instruction with access type NONE: 4 49ae8
+[WARN] Instruction with access type NONE: 3 7c1
+[WARN] Instruction with access type NONE: 4 1624ef
+[WARN] Instruction with access type NONE: 4 1173f3
+[WARN] Instruction with access type NONE: 4 9c367
+[WARN] Instruction with access type NONE: 4 5ef45
+[WARN] Instruction with access type NONE: 4 9a980
+[WARN] Instruction with access type NONE: 4 79c02
+[WARN] Instruction with access type NONE: 1 5d85
+[WARN] Instruction with access type NONE: 4 97aa4
+[WARN] Instruction with access type NONE: 4 18e6f7
+[WARN] Instruction with access type NONE: 4 95bd4
+[WARN] Instruction with access type NONE: 4 96178
+[WARN] Instruction with access type NONE: 4 97b77
+[WARN] Instruction with access type NONE: 4 91590
+[WARN] Instruction with access type NONE: 4 960a5
+[WARN] Instruction with access type NONE: 4 162476
+[WARN] Instruction with access type NONE: 4 5f715
+[WARN] Instruction with access type NONE: 4 4a1e6
+[WARN] Instruction with access type NONE: 4 9d85f
+[WARN] Instruction with access type NONE: 4 93ad4
+[WARN] Instruction with access type NONE: 4 79db0
+[WARN] Instruction with access type NONE: 4 9a882
+[WARN] Instruction with access type NONE: 4 9204b
+[WARN] Instruction with access type NONE: 4 18eb74
+[WARN] Instruction with access type NONE: 4 95f6e
+[WARN] Instruction with access type NONE: 4 9b5e3
+[WARN] Instruction with access type NONE: 4 95721
+[WARN] Instruction with access type NONE: 4 93afb
+[WARN] Instruction with access type NONE: 4 96030
+[WARN] Instruction with access type NONE: 4 162472
+[WARN] Instruction with access type NONE: 4 9d37e
+[WARN] Instruction with access type NONE: 4 5f711
+[WARN] Instruction with access type NONE: 4 93f17
+[WARN] Instruction with access type NONE: 4 96039
+[WARN] Instruction with access type NONE: 4 9bb54
+[WARN] Instruction with access type NONE: 4 16254e
+[WARN] Instruction with access type NONE: 4 1624fe
+[WARN] Instruction with access type NONE: 4 96096
+[WARN] Instruction with access type NONE: 4 18eb50
+[WARN] Instruction with access type NONE: 4 16248a
+[WARN] Instruction with access type NONE: 4 16245e
+[WARN] Instruction with access type NONE: 4 7b003
+[WARN] Instruction with access type NONE: 4 162449
+[WARN] Instruction with access type NONE: 4 9a6df
+[WARN] Instruction with access type NONE: 4 499b3
+[WARN] Instruction with access type NONE: 4 92842
+[WARN] Instruction with access type NONE: 4 11745b
+[WARN] Instruction with access type NONE: 4 1174ab
+[WARN] Instruction with access type NONE: 4 94b7d
+[WARN] Instruction with access type NONE: 4 9a3df
+[WARN] Instruction with access type NONE: 4 9a4b9
+[WARN] Instruction with access type NONE: 4 18eb99
+[WARN] Instruction with access type NONE: 4 9d364
+[WARN] Instruction with access type NONE: 4 5e7ba
+[WARN] Instruction with access type NONE: 4 7aa26
+[WARN] Instruction with access type NONE: 4 9d381
+[WARN] Instruction with access type NONE: 4 9d2e0
+[WARN] Instruction with access type NONE: 4 5f75e
+[WARN] Instruction with access type NONE: 4 940b4
+[WARN] Instruction with access type NONE: 4 916ce
+[WARN] Instruction with access type NONE: 4 8941b
+[WARN] Instruction with access type NONE: 4 95f09
+[WARN] Instruction with access type NONE: 4 1624a8
+[WARN] Instruction with access type NONE: 4 7b927
+[WARN] Instruction with access type NONE: 4 96252
+[WARN] Instruction with access type NONE: 4 79a16
+[WARN] Instruction with access type NONE: 4 92770
+[WARN] Instruction with access type NONE: 4 9a91f
+[WARN] Instruction with access type NONE: 4 9a4e2
+[WARN] Instruction with access type NONE: 4 9ae27
+[WARN] Instruction with access type NONE: 3 784
+[WARN] Instruction with access type NONE: 4 9d858
+[WARN] Instruction with access type NONE: 4 9cca1
+[WARN] Instruction with access type NONE: 4 95d6f
+[WARN] Instruction with access type NONE: 4 95fd0
+[WARN] Instruction with access type NONE: 4 97a9d
+[WARN] Instruction with access type NONE: 4 7b0ae
+[WARN] Instruction with access type NONE: 4 89458
+[WARN] Instruction with access type NONE: 4 9a713
+[WARN] Instruction with access type NONE: 4 9a4b2
+[WARN] Instruction with access type NONE: 4 9ed42
+[WARN] Instruction with access type NONE: 4 96240
+[WARN] Instruction with access type NONE: 4 9cd2e
+[WARN] Instruction with access type NONE: 4 89463
+[WARN] Instruction with access type NONE: 4 9519e
+[WARN] Instruction with access type NONE: 4 95fb8
+[WARN] Instruction with access type NONE: 4 18eb6e
+[WARN] Instruction with access type NONE: 4 9a4f6
+[WARN] Instruction with access type NONE: 4 93ae9
+[WARN] Instruction with access type NONE: 3 777
+[WARN] Instruction with access type NONE: 4 5f202
+[WARN] Instruction with access type NONE: 4 9ccbc
+[WARN] Instruction with access type NONE: 4 9cce1
+[WARN] Instruction with access type NONE: 4 79de0
+[WARN] Instruction with access type NONE: 4 9b067
+[WARN] Instruction with access type NONE: 4 9b611
+[WARN] Instruction with access type NONE: 4 9a3a5
+[WARN] Instruction with access type NONE: 4 9a6b4
+[WARN] Instruction with access type NONE: 4 499af
+[WARN] Instruction with access type NONE: 4 117452
+[WARN] Instruction with access type NONE: 4 9a91b
+[WARN] Instruction with access type NONE: 4 9a4a9
+[WARN] Instruction with access type NONE: 4 9a4fa
+[WARN] Instruction with access type NONE: 4 9b03e
+[WARN] Instruction with access type NONE: 4 99a1a
+[WARN] Instruction with access type NONE: 4 9d87c
+[WARN] Instruction with access type NONE: 4 1624d0
+[WARN] Instruction with access type NONE: 4 9c23d
+[WARN] Instruction with access type NONE: 4 9c245
+[WARN] Instruction with access type NONE: 4 9aa0f
+[WARN] Instruction with access type NONE: 4 9cd8e
+[WARN] Instruction with access type NONE: 4 9ecbf
+[WARN] Instruction with access type NONE: 4 9ecc6
+[WARN] Instruction with access type NONE: 4 9baea
+[WARN] Instruction with access type NONE: 4 956ae
+[WARN] Instruction with access type NONE: 4 9ecd2
+[WARN] Instruction with access type NONE: 4 9ed02
+[WARN] Instruction with access type NONE: 4 9ac49
+[WARN] Instruction with access type NONE: 4 18eb58
+[WARN] Instruction with access type NONE: 4 18eb69
+[WARN] Instruction with access type NONE: 4 999e1
+[WARN] Instruction with access type NONE: 4 9d870
+[WARN] Instruction with access type NONE: 4 7a8ed
+[WARN] Instruction with access type NONE: 4 9a3db
+[WARN] Instruction with access type NONE: 4 95dae
+[WARN] Instruction with access type NONE: 4 9c356
+[WARN] Instruction with access type NONE: 4 916d2
+[WARN] Instruction with access type NONE: 4 162516
+[WARN] Instruction with access type NONE: 4 9ed46
+[WARN] Instruction with access type NONE: 4 162534
+[WARN] Instruction with access type NONE: 4 92786
+[WARN] Instruction with access type NONE: 4 49ac3
+[WARN] Instruction with access type NONE: 4 99c7c
+[WARN] Instruction with access type NONE: 4 96183
+[WARN] Instruction with access type NONE: 4 7ae1c
+[WARN] Instruction with access type NONE: 4 95f7b
+[WARN] Instruction with access type NONE: 4 60da1
+[WARN] Instruction with access type NONE: 4 93f36
+[WARN] Instruction with access type NONE: 4 60d97
+[WARN] Instruction with access type NONE: 4 91551
+[WARN] Instruction with access type NONE: 4 49979
+[WARN] Instruction with access type NONE: 4 9b5f7
+[WARN] Instruction with access type NONE: 4 99a35
+[WARN] Instruction with access type NONE: 4 95d80
+[WARN] Instruction with access type NONE: 4 93fc9
+[WARN] Instruction with access type NONE: 4 89417
+[WARN] Instruction with access type NONE: 4 18eb8b
+[WARN] Instruction with access type NONE: 4 960d1
+[WARN] Instruction with access type NONE: 4 5e81b
+[WARN] Instruction with access type NONE: 4 18b2f7
+[WARN] Instruction with access type NONE: 4 1173fa
+[WARN] Instruction with access type NONE: 4 9bb20
+[WARN] Instruction with access type NONE: 4 7ae20
+[WARN] Instruction with access type NONE: 4 117447
+[WARN] Instruction with access type NONE: 4 7b08c
+[WARN] Instruction with access type NONE: 4 79cd6
+[WARN] Instruction with access type NONE: 4 9d2a8
+[WARN] Instruction with access type NONE: 4 9bac0
+[WARN] Instruction with access type NONE: 4 7b079
+[WARN] Instruction with access type NONE: 4 e6294
+[WARN] Instruction with access type NONE: 4 93f93
+[WARN] Instruction with access type NONE: 4 16247e
+[WARN] Instruction with access type NONE: 4 95fd8
+[WARN] Instruction with access type NONE: 4 79d6c
+[WARN] Instruction with access type NONE: 4 9c264
+[WARN] Instruction with access type NONE: 4 499f6
+[WARN] Instruction with access type NONE: 4 95c52
+[WARN] Instruction with access type NONE: 4 79dc8
+[WARN] Instruction with access type NONE: 4 16249a
+[WARN] Instruction with access type NONE: 4 95688
+[WARN] Instruction with access type NONE: 4 162467
+[WARN] Instruction with access type NONE: 4 894c4
+[WARN] Instruction with access type NONE: 4 61b54
+[WARN] Instruction with access type NONE: 4 93fa4
+[WARN] Instruction with access type NONE: 4 18eb63
+[WARN] Instruction with access type NONE: 4 16247a
+[WARN] Instruction with access type NONE: 4 79be9
+[WARN] Instruction with access type NONE: 4 940bb
+[WARN] Instruction with access type NONE: 4 7b933
+[WARN] Instruction with access type NONE: 4 94faf
+[WARN] Instruction with access type NONE: 4 9b630
+[WARN] Instruction with access type NONE: 4 5ef49
+[WARN] Instruction with access type NONE: 4 94000
+[WARN] Instruction with access type NONE: 4 9a391
+[WARN] Instruction with access type NONE: 4 96086
+[WARN] Instruction with access type NONE: 4 84f0f
+[WARN] Instruction with access type NONE: 4 79a26
+[WARN] Instruction with access type NONE: 4 7c2e2
+[WARN] Instruction with access type NONE: 4 7a9dc
+[WARN] Instruction with access type NONE: 4 9c25a
+[WARN] Instruction with access type NONE: 4 79db8
+[WARN] Instruction with access type NONE: 4 93fb3
+[WARN] Instruction with access type NONE: 4 79dbc
+[WARN] Instruction with access type NONE: 4 49a0e
+[WARN] Instruction with access type NONE: 4 9cd78
+[WARN] Instruction with access type NONE: 4 7a243
+[WARN] Instruction with access type NONE: 4 95d5d
+[WARN] Instruction with access type NONE: 4 89467
+[WARN] Instruction with access type NONE: 4 95014
+[WARN] Instruction with access type NONE: 4 94fb3
+[WARN] Instruction with access type NONE: 4 9b8b8
+[WARN] Instruction with access type NONE: 4 92027
+[WARN] Instruction with access type NONE: 4 4a1b0
+[WARN] Instruction with access type NONE: 4 9a6c6
+[WARN] Instruction with access type NONE: 4 5ef54
+[WARN] Instruction with access type NONE: 4 93fbc
+[WARN] Instruction with access type NONE: 4 18eb94
+[WARN] Instruction with access type NONE: 4 93f44
+[WARN] Instruction with access type NONE: 4 79b32
+[WARN] Instruction with access type NONE: 4 9b5ca
+[WARN] Instruction with access type NONE: 4 9b3f9
+[WARN] Instruction with access type NONE: 4 927e0
+[WARN] Instruction with access type NONE: 4 927b8
+[WARN] Instruction with access type NONE: 4 9bb17
+[WARN] Instruction with access type NONE: 4 79ce8
+[WARN] Instruction with access type NONE: 4 7b00f
+[WARN] Instruction with access type NONE: 4 95027
+[WARN] Instruction with access type NONE: 4 79a3e
+[WARN] Instruction with access type NONE: 4 5f20a
+[WARN] Instruction with access type NONE: 4 5f8a6
+[WARN] Instruction with access type NONE: 4 89425
+[WARN] Instruction with access type NONE: 4 8945f
+[WARN] Instruction with access type NONE: 4 89474
+[WARN] Instruction with access type NONE: 4 94004
+[WARN] Instruction with access type NONE: 4 49aff
+[WARN] Instruction with access type NONE: 4 93a65
+[WARN] Instruction with access type NONE: 4 95fe3
+[WARN] Instruction with access type NONE: 4 79d92
+[WARN] Instruction with access type NONE: 4 93a75
+[WARN] Instruction with access type NONE: 4 9201d
+[WARN] Instruction with access type NONE: 4 93aef
+[WARN] Instruction with access type NONE: 4 79cee
+[WARN] Instruction with access type NONE: 4 93aff
+[WARN] Instruction with access type NONE: 4 89485
+[WARN] Instruction with access type NONE: 4 9a740
+[WARN] Instruction with access type NONE: 4 916d6
+[WARN] Instruction with access type NONE: 4 92803
+[WARN] Instruction with access type NONE: 4 93f0b
+[WARN] Instruction with access type NONE: 4 79ce0
+[WARN] Instruction with access type NONE: 4 9d38b
+[WARN] Instruction with access type NONE: 4 79d81
+[WARN] Instruction with access type NONE: 4 18e6fc
+[WARN] Instruction with access type NONE: 4 18b6a7
+[WARN] Instruction with access type NONE: 4 95c45
+[WARN] Instruction with access type NONE: 4 9a726
+[WARN] Instruction with access type NONE: 4 4a0e0
+[WARN] Instruction with access type NONE: 4 9cdb4
+[WARN] Instruction with access type NONE: 4 95004
+[WARN] Instruction with access type NONE: 4 1310cb
+[WARN] Instruction with access type NONE: 4 99c84
+[WARN] Instruction with access type NONE: 4 96192
+[WARN] Instruction with access type NONE: 4 9c35d
+[WARN] Instruction with access type NONE: 4 99c8b
+[WARN] Instruction with access type NONE: 4 91fc7
+[WARN] Instruction with access type NONE: 4 7b074
+[WARN] Instruction with access type NONE: 4 93f29
+[WARN] Instruction with access type NONE: 4 940b7
+[WARN] Instruction with access type NONE: 4 49975
+[WARN] Instruction with access type NONE: 4 9154d
+[WARN] Instruction with access type NONE: 4 9aa07
+[WARN] Instruction with access type NONE: 4 79aaa
+[WARN] Instruction with access type NONE: 4 916c2
+[WARN] Instruction with access type NONE: 4 9c1e5
+[WARN] Instruction with access type NONE: 4 99a51
+[WARN] Instruction with access type NONE: 4 956b0
+[WARN] Instruction with access type NONE: 4 956f7
+[WARN] Instruction with access type NONE: 4 9283e
+[WARN] Instruction with access type NONE: 4 93b40
+[WARN] Instruction with access type NONE: 4 5f77c
+[WARN] Instruction with access type NONE: 4 93ae5
+[WARN] Instruction with access type NONE: 4 99c90
+[WARN] Instruction with access type NONE: 4 79b95
+[WARN] Instruction with access type NONE: 4 7a18c
+[WARN] Instruction with access type NONE: 4 9ac27
+[WARN] Instruction with access type NONE: 4 9d293
+[WARN] Instruction with access type NONE: 4 8946c
+[WARN] Instruction with access type NONE: 4 9573f
+[WARN] Instruction with access type NONE: 4 4a40a
+[WARN] Instruction with access type NONE: 4 894ea
+[WARN] Instruction with access type NONE: 4 49adf
+[WARN] Instruction with access type NONE: 4 93fb6
+[WARN] Instruction with access type NONE: 4 94b69
+[WARN] Instruction with access type NONE: 4 162452
+[WARN] Instruction with access type NONE: 4 49ac0
+[WARN] Instruction with access type NONE: 4 9bb3c
+[WARN] Instruction with access type NONE: 4 1624d6
+[WARN] Instruction with access type NONE: 4 162502
+[WARN] Instruction with access type NONE: 4 7aa01
+[WARN] Instruction with access type NONE: 4 7b03e
+[WARN] Instruction with access type NONE: 4 915d9
+[WARN] Instruction with access type NONE: 4 499d4
+[WARN] Instruction with access type NONE: 4 99a42
+[WARN] Instruction with access type NONE: 4 79b1b
+[WARN] Instruction with access type NONE: 4 96044
+[WARN] Instruction with access type NONE: 4 79b12
+[WARN] Instruction with access type NONE: 4 7aa1a
+[WARN] Instruction with access type NONE: 4 94fde
+[WARN] Instruction with access type NONE: 4 93af7
+[WARN] Instruction with access type NONE: 4 79d58
+[WARN] Instruction with access type NONE: 4 9bb35
+[WARN] Instruction with access type NONE: 4 9ed1d
+[WARN] Instruction with access type NONE: 4 9cc96
+[WARN] Instruction with access type NONE: 4 9b89b
+[WARN] Instruction with access type NONE: 4 960bd
+[WARN] Instruction with access type NONE: 4 49a06
+[WARN] Instruction with access type NONE: 4 94fe2
+[WARN] Instruction with access type NONE: 4 89435
+[WARN] Instruction with access type NONE: 4 e0227
+[WARN] Instruction with access type NONE: 4 93a58
+[WARN] Instruction with access type NONE: 4 4a20b
+[WARN] Instruction with access type NONE: 3 7b9
+[WARN] Instruction with access type NONE: 4 95ff3
+[WARN] Instruction with access type NONE: 4 99a55
+[WARN] Instruction with access type NONE: 4 94ba0
+[WARN] Instruction with access type NONE: 4 93b0b
+[WARN] Instruction with access type NONE: 4 951b4
+[WARN] Instruction with access type NONE: 4 96064
+[WARN] Instruction with access type NONE: 4 499bc
+[WARN] Instruction with access type NONE: 4 91594
+[WARN] Instruction with access type NONE: 4 7b0ba
+[WARN] Instruction with access type NONE: 4 9c215
+[WARN] Instruction with access type NONE: 4 18b2bc
+[WARN] Instruction with access type NONE: 4 9b8bc
+[WARN] Instruction with access type NONE: 4 4a0d0
+[WARN] Instruction with access type NONE: 4 1310db
+[WARN] Instruction with access type NONE: 4 84e15
+[WARN] Instruction with access type NONE: 4 96012
+[WARN] Instruction with access type NONE: 4 960c8
+[WARN] Instruction with access type NONE: 4 9a70c
+[WARN] Instruction with access type NONE: 4 9a9f2
+[WARN] Instruction with access type NONE: 3 7a2
+[WARN] Instruction with access type NONE: 4 95c13
+[WARN] Instruction with access type NONE: 4 4a190
+[WARN] Instruction with access type NONE: 4 79dad
+[WARN] Instruction with access type NONE: 4 95d6b
+[WARN] Instruction with access type NONE: 4 7afda
+[WARN] Instruction with access type NONE: 4 93fe0
+[WARN] Instruction with access type NONE: 4 894d6
+[WARN] Instruction with access type NONE: 4 95d0b
+[WARN] Instruction with access type NONE: 4 95d89
+[WARN] Instruction with access type NONE: 4 49a0a
+[WARN] Instruction with access type NONE: 4 95f49
+[WARN] Instruction with access type NONE: 4 956f3
+[WARN] Instruction with access type NONE: 4 7aebf
+[WARN] Instruction with access type NONE: 4 9b91f
+[WARN] Instruction with access type NONE: 4 9618a
+[WARN] Instruction with access type NONE: 4 89410
+[WARN] Instruction with access type NONE: 4 95c3f
+[WARN] Instruction with access type NONE: 4 4a19c
+[WARN] Instruction with access type NONE: 4 9b609
+[WARN] Instruction with access type NONE: 4 894d1
+[WARN] Instruction with access type NONE: 4 9624b
+[WARN] Instruction with access type NONE: 4 940bf
+[WARN] Instruction with access type NONE: 4 9a398
+[WARN] Instruction with access type NONE: 4 499e8
+[WARN] Instruction with access type NONE: 4 84e20
+[WARN] Instruction with access type NONE: 4 9609c
+[WARN] Instruction with access type NONE: 4 5f799
+[WARN] Instruction with access type NONE: 4 956ef
+[WARN] Instruction with access type NONE: 4 960db
+[WARN] Instruction with access type NONE: 4 9ad37
+[WARN] Instruction with access type NONE: 4 940b0
+[WARN] Instruction with access type NONE: 3 7bd
+[WARN] Instruction with access type NONE: 4 95fc3
+[WARN] Instruction with access type NONE: 4 95c31
+[INFO]    Instructions to be secured: 115
+[INFO] Printing instruction information.
+[INFO] Printing access secrecy information.
+~/cipherfix
+Analysis completed
+
+AES Fast
+Candidates:
+
+  app+000032c0 <?>: M* 000055bdd2f0d2c0
+  app+00007250 <aes_ctx_alloc>: M* 000055bdd2f11250
+  app+00003330 <?>: M* 000055bdd2f0d330
+  app+00003850 <cf_run_target>: M* 000055bdd2f0d850
+  app+00003720 <dump_secret>: M* 000055bdd2f0d720
+  libc.so.6+00025310 <?>: M* 00007f21d87fb310
+  libc.so.6+00084df0 <_IO_file_doallocate>: M* 00007f21d885adf0

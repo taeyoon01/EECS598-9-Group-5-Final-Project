@@ -15,6 +15,12 @@ libPath=$2
 interestingImages=$3
 mainBinary=$4
 
+export CF_MBEDTLS_DIR=/home/taeyoonk/cipherfix/mbedtls
+export PIN_ROOT=/home/taeyoonk/cipherfix/pin-3.26
+export TOOLS_ROOT=$PIN_ROOT/source/tools
+export CONFIG_ROOT=$PIN_ROOT/source/tools/Config
+
+
 echo -e "\e[1;94mRunning structure analysis\e[0m"
 pushd structure-analysis
 bash run.sh $workDir $libPath $workDir/structure.out $mainBinary ${@:5}

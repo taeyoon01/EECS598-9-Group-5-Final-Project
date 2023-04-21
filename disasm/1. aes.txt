@@ -1,0 +1,60 @@
+1. aes
+
+ciphertext  af 0a 4f d2 ee 95 fa 6d 46 db 22 27 b6 62 f1 d3 
+tag  fc 96 37 d3 ca b4 77 f9 b8 6e de 65 a4 06 69 85 
+
+Init time:        62 us ->     0.062 ms
+Loop time:       298 us ->     0.298 ms
+
+ciphertext  af 0a 4f d2 ee 95 fa 6d 46 db 22 27 b6 62 f1 d3 
+tag  fc 96 37 d3 ca b4 77 f9 b8 6e de 65 a4 06 69 85 
+
+Init time:        28 us ->     0.028 ms
+Loop time:        97 us ->     0.097 ms
+
+2. aes-multiround
+
+ciphertext  af 0a 4f d2 ee 95 fa 6d 46 db 22 27 b6 62 f1 d3 
+tag  b4 7a af 36 72 4d 37 34 88 63 ad 80 2d 7f a9 00 
+
+Init time:        32 us ->     0.032 ms
+Loop time:       268 us ->     0.268 ms
+
+ciphertext  af 0a 4f d2 ee 95 fa 6d 46 db 22 27 b6 62 f1 d3 
+tag  b4 7a af 36 72 4d 37 34 88 63 ad 80 2d 7f a9 00 
+
+Init time:       721 us ->     0.721 ms
+Loop time:      3999 us ->     3.999 ms
+
+3. ecdh
+secret  1e 45 61 53 bd 5b c1 9c af fa b7 3e 73 dc 15 68 b6 7c f6 0f 20 1a a5 21 19 1c 75 22 15 ce 27 9e 
+
+Init time:       762 us ->     0.762 ms
+Loop time:      1379 us ->     1.379 ms
+
+secret  1e 45 61 53 bd 5b c1 9c af fa b7 3e 73 dc 15 68 b6 7c f6 0f 20 1a a5 21 19 1c 75 22 15 ce 27 9e 
+
+Init time:      2903 us ->     2.903 ms
+Loop time:      5636 us ->     5.636 ms
+4. rsa
+signature  5c f0 aa 30 7c 49 27 55 34 07 19 fa 9f 9d 93 63 af f2 31 2d 50 fc ff 1c 48 6f cd 3c cd bb df 61 f8 bb c2 ef fd f1 a6 e4 48 87 25 f2 2a b4 9e ed 56 01 4d 3b b8 1b 5c 3b a3 10 43 0b 50 b5 81 90 
+
+Init time:        44 us ->     0.044 ms
+Loop time:       508 us ->     0.508 ms
+
+signature  21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 21 
+
+Init time:        58 us ->     0.058 ms
+Loop time:      1859 us ->     1.859 ms
+
+
+5. ecdsa - enhanced
+signature  30 45 02 20 14 8c 00 1b 52 4e ed 86 2f 29 1d b5 89 3b 34 56 58 58 1e 9e 11 13 01 a4 a7 32 50 4b 08 e9 83 8e 02 21 00 f2 73 df a2 fb c9 70 f9 08 61 1d 6a dd 1a 3d 69 b3 d3 b7 ab 44 97 67 4c bd df f7 62 8d 02 de 88 
+
+Init time:        54 us ->     0.054 ms
+Loop time:      7232 us ->     7.232 ms
+
+signature  30 45 02 20 14 8c 00 1b 52 4e ed 86 2f 29 1d b5 89 3b 34 56 58 58 1e 9e 11 13 01 a4 a7 32 50 4b 08 e9 83 8e 02 21 00 f2 73 df a2 fb c9 70 f9 08 61 1d 6a dd 1a 3d 69 b3 d3 b7 ab 44 97 67 4c bd df f7 62 8d 02 de 88 
+
+Init time:       622 us ->     0.622 ms
+Loop time:      1087 us ->     1.087 ms
